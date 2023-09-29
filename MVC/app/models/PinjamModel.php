@@ -61,10 +61,10 @@ class PinjamModel {
         return $this->db->rowCount();
     }
 
-    public function cariPinjam($buku) 
+    public function cariPinjam($pinjam) 
     {
-        $this->db->query("SELECT * FROM " . $this->table . " WHERE nama_peminjam LIKE :nama_peminjam");
-        $this->db->bind('nama_peminjam', '%'. $buku . '%');
+        $this->db->query("SELECT * FROM " . $this->table . " WHERE nama_peminjam LIKE :pinjam OR jenis_barang LIKE :pinjam");
+        $this->db->bind('pinjam', '%'. $pinjam . '%');
         return $this->db->resultSet();
     }
 }

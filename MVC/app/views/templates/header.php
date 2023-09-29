@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-  <title>MVC</title>
+  <title>MVC - Halaman <?=$data['judul']?></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
@@ -18,7 +19,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active text-white" aria-current="page" href="<?= BASE_URL ?>/home/index">Home</a>
+            <a class="nav-link active text-white" aria-current="page" href="<?= BASE_URL ?>/home/index"><i class="fa-solid fa-house"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?= BASE_URL ?>/pinjam">Peminjaman</a>

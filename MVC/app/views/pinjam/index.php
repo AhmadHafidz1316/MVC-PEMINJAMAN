@@ -3,14 +3,14 @@
 
     <div class="d-flex justify-content-between">
         <div>
-            <a href="<?= BASE_URL; ?>/pinjam/tambah" class="btn btn-primary float-right">Tambah Peminjaman</a>
+            <a href="<?= BASE_URL; ?>/pinjam/tambah" class="btn btn-primary float-right"><i class="fa-solid fa-plus fa-2xs"></i>  <i class="fa-solid fa-address-card"></i></a>
         </div>
         <div class="d-flex">
             <form action="<?= BASE_URL; ?>/pinjam/cari" method="post" class="d-flex">
                 <input type="text" class="form-control" name="search">
-                <button type="submit" class="btn btn-outline-secondary">Cari</button>
+                <button type="submit" class="btn btn-outline-secondary"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
-            <a href="<?= BASE_URL; ?>/pinjam/index" class="btn btn-outline-danger">reset</a>
+            <a href="<?= BASE_URL; ?>/pinjam/index" class="btn btn-outline-danger"><i class="fa-solid fa-arrows-rotate"></i></a>
         </div>
     </div>
 
@@ -39,21 +39,33 @@
                     <td><?= $row['no_barang']; ?></td>
                     <td><?= $row['tgl_pinjam']; ?></td>
                     <td><?= $row['tgl_kembali']; ?></td>
-                    <td>
-                        <?php if (date('Y-m-d', strtotime($row["tgl_kembali"])) == date('Y-m-d', strtotime($row['tgl_pinjam']))) : ?>
-                            <div class="btn btn-success text-white">Sudah Kembali</div>
-                        <?php else : ?>
-                            <div class="btn btn-danger text-white">Belum Kembali</div>
-                        <?php endif ?>
-                    </td>
-                    <td>
-                        <?php if (date('Y-m-d', strtotime($row["tgl_kembali"])) != date('Y-m-d', strtotime($row['tgl_pinjam']))) : ?>
-                            <a href="<?= BASE_URL ?>/pinjam/edit/<?= $row['id'] ?>" class="btn btn-primary">Edit</a>
-                        <?php endif ?>
-                        <a href="<?= BASE_URL ?>/pinjam/hapus/<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Hapus data?');">Hapus</a>
+                   <td>
+                    <?php
+                        $tgl_kembali = strtotime($row["tgl_kembali"]);
+                        $tgl_pinjam = strtotime($row['tgl_pinjam']);
+                        $selisih_hari = floor(($tgl_kembali - $tgl_pinjam) / (60 * 60 * 24));
+
+                        if ($selisih_hari == 0 || $selisih_hari == 1){
+                        echo '<div style="background-color: #3EC70B; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;">Sudah Kembali</div>';
+                        } else {
+                            // Jika tidak, maka belum kembali
+                            echo '<div style="background-color: red; height: 1.7rem; text-align: center; color: white; margin-top: 0.5rem; border-radius: 7px;">Belum Kembali</div>';
+                        }
+                    ?>
+                  </td> 
+                  <td> 
+                    <?php
+                        $tgl_kembali = strtotime($row["tgl_kembali"]);
+                        $tgl_pinjam = strtotime($row['tgl_pinjam']);
+                        $selisih_hari = floor(($tgl_kembali - $tgl_pinjam) / (60 * 60 * 24));
+
+                        if ($selisih_hari != 0 && $selisih_hari != 1) {
+                            echo '<a href="' . BASE_URL . '/pinjam/edit/' . $row['id'] . '" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>';
+                        }
+                    ?>
+                        <a href="<?= BASE_URL ?>/pinjam/hapus/<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Hapus data?');"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
-
             <?php $no++;
             endforeach; ?>
         </tbody>
